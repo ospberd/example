@@ -17,7 +17,7 @@ import { FilesModule } from './files/files.module';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'ospberd',
+      username: 'osp',
       password: '1',
       database: 'myfirm',
       entities: ['dist/**/*.entity{.ts,.js}'],

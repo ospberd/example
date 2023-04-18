@@ -1,14 +1,30 @@
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FilesService } from './files.service';
-import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
+
+import { Response } from 'express';
+import { log } from 'console';
 
 @Controller('files')
 @ApiTags('files')
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
-  @ApiOperation({summary: 'Upload file and save on server'})
+  @ApiOperation({summary: 'Managed attachment files'})
+  
  
+  @Get(':entityid')
+  findByEntity(@Param('entityid') entityid: string) {
+    return this.filesService.findByEntityID(+entityid);
+  }
+
+  @Get('download/:savepath')
+    async downloadFile(@Param('savepath') savePath: string, @Res() res: Response) {  
+    const {  fileType, fileName }  = await this.filesService.findBySavePath(savePath);
+    const fileLocation = `./${savePath}`;
+    res.setHeader('Content-type', fileType);
+    res.download(fileLocation, fileName);
+  }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file', {
@@ -33,6 +49,18 @@ export class FilesController {
                    @Body('entityID') entityID: number) {
     await this.filesService.uploadFile(file,entityName,entityID );
   }
+
+  @Delete('all/:entityid')
+  removeAll(@Param('entityid') entityID: string) {
+    
+    return this.filesService.removeAll(+entityID);
+  }
+
+  @Delete('one/:savepath')
+  removeOne(@Param('savepath') savePath: string) {
+    return this.filesService.removeOne(savePath);
+  }
+  
 }
 
 function Today(): {day: number, month: number, year: number} {
