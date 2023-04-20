@@ -8,7 +8,7 @@ import { ApiProperty , } from '@nestjs/swagger/dist/decorators/api-property.deco
 export class CreatePersonDto {
   
   @ApiModelProperty()
-  id: number;
+  id: string;
   @ApiModelProperty()
   firstName: string;
   @ApiModelProperty()
@@ -21,7 +21,7 @@ export class CreatePersonDto {
     items: {
       type: 'object',
       properties: {
-        id: { type: 'number' },
+        id: { type: 'string' },
         kind: { type: 'string' },
         number: { type: 'string' },
         isPrimary: { type: 'boolean' },

@@ -27,16 +27,18 @@ export class PersonsService {
   findAll(): Promise<Person[]> {
     return this.personsRepository.find({
       relations: {
-        phones: true,
+        phones: true, 
+   
       },
     }); //`This action returns all persons`;
   }
 
-  findOne(id: number): Promise<Person> {
+  findOne(id: string): Promise<Person> {
     return this.personsRepository.findOne({
       where: { id: id },
       relations: {
-        phones: true,
+        phones: true, 
+ 
       },
     });
   }
@@ -53,7 +55,7 @@ async findOne(id: number): Promise<Person> {
 
 */
 
-  async update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
+  async update(id: string, updatePersonDto: UpdatePersonDto): Promise<Person> {
     // Update
     console.log('----- update');
     console.log(updatePersonDto.phones);
@@ -68,7 +70,7 @@ async findOne(id: number): Promise<Person> {
     return this.personsRepository.findOneBy({ id });
   }
 
-  async save(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
+  async save(id: string, updatePersonDto: UpdatePersonDto): Promise<Person> {
     // Update
     console.log('--------save');
     console.log(updatePersonDto.phones);
@@ -89,7 +91,7 @@ async findOne(id: number): Promise<Person> {
     });
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.personsRepository.delete(id);
   }
 }

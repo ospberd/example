@@ -15,7 +15,7 @@ export class FilesController {
  
   @Get(':entityid')
   findByEntity(@Param('entityid') entityid: string) {
-    return this.filesService.findByEntityID(+entityid);
+    return this.filesService.findByEntityID(entityid);
   }
 
   @Get('download/:savepath')
@@ -46,14 +46,14 @@ export class FilesController {
   })
   async uploadFile(@UploadedFile() file: Express.Multer.File, 
                    @Body('entityName') entityName: string, 
-                   @Body('entityID') entityID: number) {
+                   @Body('entityID') entityID: string) {
     await this.filesService.uploadFile(file,entityName,entityID );
   }
 
   @Delete('all/:entityid')
   removeAll(@Param('entityid') entityID: string) {
     
-    return this.filesService.removeAll(+entityID);
+    return this.filesService.removeAll(entityID);
   }
 
   @Delete('one/:savepath')

@@ -30,7 +30,7 @@ export class PhonemodelsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.phonemodelsService.findOne(+id);
+    return this.phonemodelsService.findOne(id);
   }
 
   @Patch(':id')
@@ -38,11 +38,11 @@ export class PhonemodelsController {
     @Param('id') id: string,
     @Body() updatePhonemodelDto: UpdatePhonemodelDto,
   ) {
-    return this.phonemodelsService.save(+id, updatePhonemodelDto);
+    return this.phonemodelsService.save(id, updatePhonemodelDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.phonemodelsService.remove(+id);
+    return this.phonemodelsService.remove(id);
   }
 }

@@ -30,7 +30,7 @@ export class PhonemodelsService {
     }); //`This action returns all persons`;
   }
 
-  findOne(id: number): Promise<Phonemodel> {
+  findOne(id: string): Promise<Phonemodel> {
     return this.phonemodelRepository.findOne({
       where: { id: id },
     });
@@ -40,7 +40,7 @@ export class PhonemodelsService {
     return `This action updates a #${id} phonemodel`;
   }
 
-  async save(id: number, updatePhonemodelDto: UpdatePhonemodelDto): Promise<Phonemodel> {
+  async save(id: string, updatePhonemodelDto: UpdatePhonemodelDto): Promise<Phonemodel> {
     // Update
 
     await this.phonemodelRepository.save({
@@ -57,7 +57,7 @@ export class PhonemodelsService {
       }
 
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.phonemodelRepository.delete(id);
   }
 

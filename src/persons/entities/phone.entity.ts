@@ -5,14 +5,16 @@ import {
   JoinColumn,
   RelationId,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Person } from './person.entity';
 import { Phonemodel } from '../../phonemodels/entities/phonemodel.entity';
 
 @Entity()
 export class Phone {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   kind: string;
@@ -37,6 +39,12 @@ export class Phone {
   })
   @JoinColumn({ name: 'phonemodelID' })
   model: Phonemodel;
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  public created_at: Date;
+
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  public updated_at: Date;
 
   /* 
   toJSON() {

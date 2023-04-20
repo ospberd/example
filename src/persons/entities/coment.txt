@@ -1,0 +1,13 @@
+SELECT person.id persona, SUM(phonemodel.price) sumprise FROM person 
+LEFT JOIN phone ON person.id = phone.personId
+LEFT JOIN phonemodel ON phone.phonemodelID = phonemodel.id
+GROUP BY person.id;
+
+
+@ViewEntity({
+    expression: `
+        SELECT "post"."id" AS "id", "post"."name" AS "name", "category"."name" AS "categoryName"
+        FROM "post" "post"
+        LEFT JOIN "category" "category" ON "post"."categoryId" = "category"."id"
+    `
+})

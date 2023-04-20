@@ -14,7 +14,7 @@ export class FilesService {
     private filesRepository: Repository<File>,
   ) {}
 
-  async uploadFile(file: Express.Multer.File, entityName:string, entityID: number) {
+  async uploadFile(file: Express.Multer.File, entityName:string, entityID: string) {
     
     const uploadFile: File = new File();
 
@@ -29,7 +29,7 @@ export class FilesService {
     return this.filesRepository.save(uploadFile);
   }
 
-  findByEntityID(entityid: number): Promise<File[]> {
+  findByEntityID(entityid: string): Promise<File[]> {
     return this.filesRepository.find({
       where: { entityID: entityid },
     });
@@ -41,7 +41,7 @@ export class FilesService {
     });
   }
 
-  async removeAll(entityID: number): Promise<void> {
+  async removeAll(entityID: string): Promise<void> {
    const listF = await this.filesRepository.find({
       where: { entityID: entityID },
     })

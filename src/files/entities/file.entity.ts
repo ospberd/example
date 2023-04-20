@@ -4,20 +4,22 @@ import {
     Column,
     PrimaryGeneratedColumn,
     AfterRemove,
+    CreateDateColumn,
+    UpdateDateColumn,
   } from 'typeorm';
   import { FilesService } from '../files.service';
 
   
   @Entity()
   export class File {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
   
     @Column()
     entityName: string;
   
     @Column()
-    entityID: number;
+    entityID: string;
 
     @Column()
     savePath: string;
@@ -30,6 +32,12 @@ import {
 
     @Column()
     fileName: string; 
+
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    public created_at: Date;
+  
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    public updated_at: Date;
 
     @AfterRemove()
     onAfterRemove() {

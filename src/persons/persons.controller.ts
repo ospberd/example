@@ -32,16 +32,16 @@ export class PersonsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.personsService.findOne(+id);
+    return this.personsService.findOne(id);
   }
 
   @Patch(':id')
   save(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
-    return this.personsService.save(+id, updatePersonDto);
+    return this.personsService.save(id, updatePersonDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.personsService.remove(+id);
+    return this.personsService.remove(id);
   }
 }
