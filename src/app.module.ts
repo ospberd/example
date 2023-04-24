@@ -8,6 +8,7 @@ import { PersonsModule } from './persons/persons.module';
 import { PhonemodelsModule } from './phonemodels/phonemodels.module';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
+import { ChatGateway } from './chat/chat/chat.gateway';
 
 
 @Module({
@@ -33,7 +34,7 @@ import { FilesModule } from './files/files.module';
     FilesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}
