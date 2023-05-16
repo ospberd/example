@@ -29,14 +29,14 @@ export class PersonsController {
 
 
  
-  @ApiBearerAuth('JWT-auth')
+ // @ApiBearerAuth('JWT-auth')
   @Get()  
-  @UseGuards(AuthGuard)
+ // @UseGuards(AuthGuard)
   findAll() {
     return this.personsService.findAll();
   }
 
-  @Get(':id')
+  @Get('byid/:id')
   findOne(@Param('id') id: string) {
     return this.personsService.findOne(id);
   }
